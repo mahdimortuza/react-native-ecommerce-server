@@ -4,6 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import connectDb from "./config/db.js";
 import testRoutes from "./routes/testRouter.js";
+import router from "./routes/userRoute.js";
 
 
 // server & port
@@ -19,6 +20,7 @@ app.use(cors())
 
 // routes
 app.use("/api/v1", testRoutes)
+app.use("/api/v1/user", router)
 
 app.get("/", (req, res) => {
     return res.status(200).send("Hi man")
