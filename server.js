@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -12,11 +13,13 @@ dotenv.config()
 connectDb( )
 const port = process.env.PORT || 5000
 const app = express()
+
  
 // parsers
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser())
 
 // routes
 app.use("/api/v1", testRoutes)
@@ -27,5 +30,5 @@ app.get("/", (req, res) => {
 })
 
 app.listen(port,() => {
-    console.log(`server running on ${port}`)
+    console.log(`server running on ${port} on ${process.env.NODE_ENV} mode`)
 })
