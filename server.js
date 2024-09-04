@@ -1,3 +1,4 @@
+import cloudinary from "cloudinary";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -11,6 +12,12 @@ import router from "./routes/userRoute.js";
 // server & port
 dotenv.config()
 connectDb( )
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+})
+
 const port = process.env.PORT || 5000
 const app = express()
 

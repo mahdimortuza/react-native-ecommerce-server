@@ -1,4 +1,6 @@
+import cloudinary from "cloudinary"
 import userModel from "../models/userModel.js"
+import { getDataUri } from "../utils/features.js"
 
 export const registerController = async( req, res) => {
     try {
@@ -193,6 +195,36 @@ export const updatePasswordController = async(req, res) => {
             res.status(500).send({
                 success: false,
                 message:"Error in update password API",
+                error
+            })
+    }
+}
+
+// update user profile photo
+export const updateProfilePicController = async(req, res) => {
+    try {
+         const user = await userModel.findById(req.user._id)
+
+         // get file from client
+         const file = getDataUri(req.file)
+
+         // delete previous image
+         await cloudinary.v2.uploader.destroy(user.profilePic.public_id)
+         //update
+         const cdb = await cloudinary.v2.uploader.upload(file.content)
+         user.profilePic = {
+            public_id: cdb.public_id,
+            url: cdb.secure_url
+         }
+         res.status(200).send({
+            success: true,
+            message:"Profile picture updated",
+        })
+    } catch (error) {
+        console.log(error)
+            res.status(500).send({
+                success: false,
+                message:"Error in update profile pic API",
                 error
             })
     }
