@@ -5,8 +5,9 @@ import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
 import connectDb from "./config/db.js";
+import productRoute from "./routes/productRoute.js";
 import testRoutes from "./routes/testRouter.js";
-import router from "./routes/userRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 
 // server & port
@@ -30,7 +31,8 @@ app.use(cookieParser())
 
 // routes
 app.use("/api/v1", testRoutes)
-app.use("/api/v1/user", router)
+app.use("/api/v1/user", userRoute)
+app.use("/api/v1/product", productRoute)
 
 app.get("/", (req, res) => {
     return res.status(200).send("Hi man")
