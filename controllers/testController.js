@@ -1,6 +1,6 @@
 export const testController = (req, res) => {
-    res.status(200).send({
-        message: "test  route",
-        success: true
-    })
-}
+  res.status(200).send({
+    message: "Test Routes",
+    success: true,
+  });
+};

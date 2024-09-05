@@ -1,33 +1,73 @@
 import mongoose from "mongoose";
 
-
-const productSchema = new mongoose.Schema({
+// REVIEW MODAL
+const reviewSchema = new mongoose.Schema(
+  {
     name: {
       type: String,
-      required: [true, 'Product name is required.'],
+      required: [true, "name is require"],
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    comment: {
+      type: String,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+      required: [true, "user require"],
+    },
+  },
+  { timestamps: true }
+);
+
+// PROCUCT MODAL
+const productSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "product name is required"],
     },
     description: {
       type: String,
-      required: [true, 'Product description is required.'],
+      required: [true, "produvct description is required"],
     },
     price: {
       type: Number,
-      required: [true, 'Product price is required.'],
+      required: [true, "product price is required"],
     },
     stock: {
       type: Number,
-      required: [true, 'Stock quantity is required.'],
+      required: [true, "product stock required"],
     },
+    // quantity: {
+    //   type: Number,
+    //   required: [true, "product quantity required"],
+    // },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:"Category"
+      ref: "Category",
     },
-    profilePic:{
-        public_id: {type: String},
-        url: {type: String}
-      }
-  }, { timestamps: true });
-  
-  export const productModel = mongoose.model('Product', productSchema);
-  
-  export default productModel;
+    images: [
+      {
+        public_id: String,
+        url: String,
+      },
+    ],
+    reviews: [reviewSchema],
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
+
+export const productModel = mongoose.model("Products", productSchema);
+export default productModel;
