@@ -1,14 +1,14 @@
 {
-  "name": "ecommerce",
+  "name": "react-native-e-commerce-app",
   "version": "1.0.0",
-  "description": "ecommerce app ",
+  "description": "this is the server app for react native e-commerce mobile application.",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js"
   },
-  "author": "Techinfoyt",
+  "author": "Mortuza",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
